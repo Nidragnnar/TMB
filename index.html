@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calcule sua taxa metabólica basal (TMB) e quantas calorias você gasta por dia.">
+    <title>Calculadora de Taxa Basal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <main class="cartao">
+        <header class="topo">
+            <h1>Calculadora de Taxa Basal</h1>
+            <p>Descubra quantas calorias seu corpo gasta em repouso e ao longo do dia.</p>
+        </header>
+
+        <form id="form-tmb" class="formulario" novalidate>
+            <fieldset class="grupo-opcoes sexo">
+                <legend>Sexo biológico</legend>
+                <label class="pilula"><input type="radio" name="sexo" value="feminino" checked> Feminino</label>
+                <label class="pilula"><input type="radio" name="sexo" value="masculino"> Masculino</label>
+            </fieldset>
+
+            <div class="campos">
+                <div class="campo">
+                    <label for="peso">Peso</label>
+                    <div class="entrada">
+                        <input id="peso" type="text" inputmode="decimal" autocomplete="off" placeholder="70,5"
+                            aria-describedby="erro-peso">
+                        <span class="unidade">kg</span>
+                    </div>
+                    <small class="erro" id="erro-peso" aria-live="polite"></small>
+                </div>
+
+                <div class="campo">
+                    <label for="altura">Altura</label>
+                    <div class="entrada">
+                        <input id="altura" type="text" inputmode="decimal" autocomplete="off" placeholder="175"
+                            aria-describedby="erro-altura">
+                        <span class="unidade">cm ou m</span>
+                    </div>
+                    <small class="erro" id="erro-altura" aria-live="polite"></small>
+                </div>
+
+                <div class="campo">
+                    <label for="idade">Idade</label>
+                    <div class="entrada">
+                        <input id="idade" type="text" inputmode="numeric" autocomplete="off" placeholder="30"
+                            aria-describedby="erro-idade">
+                        <span class="unidade">anos</span>
+                    </div>
+                    <small class="erro" id="erro-idade" aria-live="polite"></small>
+                </div>
+            </div>
+
+            <fieldset class="grupo-opcoes atividades">
+                <legend>Nível de atividade física</legend>
+                <label class="atividade">
+                    <input type="radio" name="atividade" value="sedentario" checked>
+                    <span><strong>Sedentário</strong><small>Pouco ou nenhum exercício</small></span>
+                </label>
+                <label class="atividade">
+                    <input type="radio" name="atividade" value="leve">
+                    <span><strong>Levemente ativo</strong><small>Exercício leve 1 a 3 dias por semana</small></span>
+                </label>
+                <label class="atividade">
+                    <input type="radio" name="atividade" value="moderado">
+                    <span><strong>Moderadamente ativo</strong><small>Exercício moderado 3 a 5 dias por semana</small></span>
+                </label>
+                <label class="atividade">
+                    <input type="radio" name="atividade" value="ativo">
+                    <span><strong>Muito ativo</strong><small>Exercício intenso 6 a 7 dias por semana</small></span>
+                </label>
+                <label class="atividade">
+                    <input type="radio" name="atividade" value="muitoAtivo">
+                    <span><strong>Extremamente ativo</strong><small>Treino pesado diário ou trabalho físico</small></span>
+                </label>
+            </fieldset>
+
+            <div class="botoes">
+                <button type="submit" class="botao">Calcular</button>
+                <button type="reset" class="botao botao-secundario">Limpar</button>
+            </div>
+        </form>
+
+        <section class="resultado" aria-live="polite">
+            <div class="destaques">
+                <div class="destaque">
+                    <p class="destaque-rotulo">Taxa metabólica basal</p>
+                    <p class="destaque-valor"><span id="valor-tmb"></span> <small>kcal/dia</small></p>
+                    <p class="destaque-desc">Gasto do corpo em repouso total</p>
+                </div>
+                <div class="destaque destaque-principal">
+                    <p class="destaque-rotulo">Gasto calórico diário</p>
+                    <p class="destaque-valor"><span id="valor-get"></span> <small>kcal/dia</small></p>
+                    <p class="destaque-desc">Com o seu nível de atividade</p>
+                </div>
+            </div>
+
+            <h2>Metas de referência</h2>
+            <ul class="metas">
+                <li style="--cor: var(--meta-perder)">
+                    <span>Perder peso</span><strong><span id="meta-perder"></span> kcal</strong>
+                    <small>cerca de 0,5 kg por semana</small>
+                </li>
+                <li style="--cor: var(--meta-manter)">
+                    <span>Manter o peso</span><strong><span id="meta-manter"></span> kcal</strong>
+                    <small>igual ao gasto diário</small>
+                </li>
+                <li style="--cor: var(--meta-ganhar)">
+                    <span>Ganhar peso</span><strong><span id="meta-ganhar"></span> kcal</strong>
+                    <small>ganho gradual</small>
+                </li>
+            </ul>
+
+            <p class="alerta" id="aviso-deficit" hidden>⚠️ A meta para perder peso ficou abaixo da sua taxa basal.
+                Comer menos do que a TMB sem acompanhamento profissional não é recomendado.</p>
+
+            <p class="comparacao">Pela fórmula de Harris-Benedict, sua TMB seria de <strong id="valor-harris"></strong>
+                kcal/dia.</p>
+        </section>
+
+        <p class="nota">Os valores são estimativas calculadas pela fórmula de Mifflin-St Jeor e não substituem a
+            orientação de um nutricionista ou médico.</p>
+    </main>
+</body>
+
+</html>
